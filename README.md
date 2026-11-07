@@ -172,5 +172,3 @@ python merge_glyphs.py                                               # 合并进
 - OLED 驱动（`OLED.cpp` / `OLED.h` / `OLED_Data.*`）来自 [江协科技](https://jiangxiekeji.com/)，**版权归其所有**，按其“免费开源共享、任何人不得据为己有”的条款使用，原版权声明保留在 `OLED.cpp` 文件头部。**这些文件不适用本仓库的 MIT 许可证。**
 - 天气数据来自 [心知天气](https://www.seniverse.com/)，使用需自行申请密钥并遵守其服务条款。
 - 汉字字模由 Windows 系统字体宋体渲染生成，仅为屏幕显示所需的点阵数据，不含字体文件本身。
-
-如果你要基于本项目二次开发并再发布，请保留 `NOTICE` 中对江协科技的署名。
