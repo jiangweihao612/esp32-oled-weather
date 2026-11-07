@@ -167,8 +167,4 @@ python merge_glyphs.py                                               # 合并进
 
 ## 版权与致谢
 
-**许可证：MIT**（见 [LICENSE](LICENSE)），但**仅覆盖本人原创代码**：`Weather.*`、`WeatherIcon.*`、`exp11_oled_weather.ino`、`tools/` 下的脚本。仓库内第三方作品的版权归各自作者所有，详见 [NOTICE](NOTICE)。
-
-- OLED 驱动（`OLED.cpp` / `OLED.h` / `OLED_Data.*`）来自 [江协科技](https://jiangxiekeji.com/)，**版权归其所有**，按其“免费开源共享、任何人不得据为己有”的条款使用，原版权声明保留在 `OLED.cpp` 文件头部。**这些文件不适用本仓库的 MIT 许可证。**
-- 天气数据来自 [心知天气](https://www.seniverse.com/)，使用需自行申请密钥并遵守其服务条款。
-- 汉字字模由 Windows 系统字体宋体渲染生成，仅为屏幕显示所需的点阵数据，不含字体文件本身。
+OLED 驱动（`OLED.cpp` / `OLED.h` / `OLED_Data.*`）来自 [江协科技](https://jiangxiekeji.com/)，版权归其所有。
