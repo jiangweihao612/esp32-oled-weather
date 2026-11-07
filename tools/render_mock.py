@@ -112,6 +112,52 @@ def draw_screen(date, week, time, region, city_zh, temp, text_zh, icon):
     draw_right(127, 48, "%dC" % temp, 8)
 
 
+import struct
+import zlib
+
+
+def png_chunk(tag, data):
+    return (struct.pack(">I", len(data)) + tag + data
+            + struct.pack(">I", zlib.crc32(tag + data) & 0xFFFFFFFF))
+
+
+def save_png(path, shots, scale=3, cols=2, margin=18, gap=14):
+    """把多张 128x64 画面拼成一张 PNG（每屏四周加 1px 浅灰边框）"""
+    cw, ch = W * scale, H * scale
+    rows = (len(shots) + cols - 1) // cols
+    pw = margin * 2 + cols * cw + (cols - 1) * gap
+    ph = margin * 2 + rows * ch + (rows - 1) * gap
+    img = [[255] * pw for _ in range(ph)]
+
+    for idx, scr in enumerate(shots):
+        r, c = divmod(idx, cols)
+        ox = margin + c * (cw + gap)
+        oy = margin + r * (ch + gap)
+        for x in range(-1, cw + 1):
+            img[oy - 1][ox + x] = 190
+            img[oy + ch][ox + x] = 190
+        for y in range(-1, ch + 1):
+            img[oy + y][ox - 1] = 190
+            img[oy + y][ox + cw] = 190
+        for y in range(ch):
+            row_px = img[oy + y]
+            srow = scr[y // scale]
+            for x in range(cw):
+                if srow[x // scale]:
+                    row_px[ox + x] = 0
+
+    raw = b"".join(b"\x00" + bytes(v for px in row for v in (px, px, px)) for row in img)
+    with open(path, "wb") as f:
+        f.write(b"\x89PNG\r\n\x1a\n")
+        f.write(png_chunk(b"IHDR", struct.pack(">IIBBBBB", pw, ph, 8, 2, 0, 0, 0)))
+        f.write(png_chunk(b"IDAT", zlib.compress(raw, 9)))
+        f.write(png_chunk(b"IEND", b""))
+
+
+def snapshot():
+    return [row[:] for row in screen]
+
+
 def save(path, scale=4):
     # write a 24-bit BMP by hand (no third party libs available here)
     w, h = W * scale, H * scale
@@ -186,5 +232,20 @@ for i, (a, b, c) in enumerate(LOADING):
     for s in (a, b, c):
         if text_w(s, 8) > W:
             print("OVERFLOW:", s, text_w(s, 8))
+
+# README 用的预览图：4 屏拼一张 PNG
+shots = []
+draw_screen(*CASES[0])
+shots.append(snapshot())
+draw_screen(*CASES[3])
+shots.append(snapshot())
+draw_screen(*CASES[8])
+shots.append(snapshot())
+draw_loading(*LOADING[0])
+shots.append(snapshot())
+docs_dir = os.path.join(PROJ, "docs")
+os.makedirs(docs_dir, exist_ok=True)
+save_png(os.path.join(docs_dir, "preview.png"), shots, scale=3, cols=2)
+print("preview ->", os.path.join(docs_dir, "preview.png"))
 
 print("done")
