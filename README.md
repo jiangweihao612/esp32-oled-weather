@@ -135,6 +135,8 @@ python merge_glyphs.py                                               # 合并进
 ├── OLED.h / .cpp            SSD1306 驱动（硬件 I2C）
 ├── OLED_Data.h / .cpp       字库：ASCII 8x16 / 6x8，汉字 16x16
 ├── docs/preview.png         README 用的预览图
+├── LICENSE                  MIT（仅覆盖本人原创代码）
+├── NOTICE                   第三方代码/数据版权说明
 └── tools/
     ├── cn_chars.txt         需要字模的汉字清单
     ├── gen_assets.ps1       生成汉字字模 + 天气图标 + 预览图
@@ -165,8 +167,10 @@ python merge_glyphs.py                                               # 合并进
 
 ## 版权与致谢
 
-- OLED 驱动（`OLED.cpp` / `OLED.h` / `OLED_Data.*`）来自 [江协科技](https://jiangxiekeji.com/)，版权归其所有，按其"免费开源共享、任何人不得据为己有"的条款使用，请保留文件头部的版权声明。
-- 天气数据来自 [心知天气](https://www.seniverse.com/)，使用需自行申请密钥并遵守其服务条款。
-- 本项目其余代码（`Weather.*`、`WeatherIcon.*`、`exp11_oled_weather.ino`）可自由参考、修改、取用。
+**许可证：MIT**（见 [LICENSE](LICENSE)），但**仅覆盖本人原创代码**：`Weather.*`、`WeatherIcon.*`、`exp11_oled_weather.ino`、`tools/` 下的脚本。仓库内第三方作品的版权归各自作者所有，详见 [NOTICE](NOTICE)。
 
-仓库未附带开源许可证文件。若打算让他人自由使用，请自行选择并添加（如 MIT）。
+- OLED 驱动（`OLED.cpp` / `OLED.h` / `OLED_Data.*`）来自 [江协科技](https://jiangxiekeji.com/)，**版权归其所有**，按其“免费开源共享、任何人不得据为己有”的条款使用，原版权声明保留在 `OLED.cpp` 文件头部。**这些文件不适用本仓库的 MIT 许可证。**
+- 天气数据来自 [心知天气](https://www.seniverse.com/)，使用需自行申请密钥并遵守其服务条款。
+- 汉字字模由 Windows 系统字体宋体渲染生成，仅为屏幕显示所需的点阵数据，不含字体文件本身。
+
+如果你要基于本项目二次开发并再发布，请保留 `NOTICE` 中对江协科技的署名。
