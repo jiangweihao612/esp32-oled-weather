@@ -1,0 +1,20 @@
+# 本机配置文件：里面是 WiFi 密码和心知天气私钥，永远不要提交
+# 仓库里只保留 Config.example.h，别人 clone 后复制成 Config.h 再填自己的
+Config.h
+
+# WorkBuddy 本地记忆（含密码、密钥、调试记录）
+.workbuddy/
+
+# 编译产物
+build/
+*.bin
+*.elf
+*.map
+
+# PC 端离屏模拟生成的预览图
+tools/mock_*.bmp
+
+# 系统文件
+Thumbs.db
+desktop.ini
+.DS_Store
